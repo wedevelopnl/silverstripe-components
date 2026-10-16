@@ -1,0 +1,28 @@
+{
+    "name": "ss-components-syntax",
+    "displayName": "Silverstripe Components Syntax",
+    "description": "Highlights <:Component> and <:slot> tags from wedevelopnl/silverstripe-components in .ss templates",
+    "publisher": "wedevelop",
+    "version": "0.1.0",
+    "license": "BSD-3-Clause",
+    "engines": {
+        "vscode": "^1.80.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "extensionDependencies": [
+        "adrianhumphreys.silverstripe"
+    ],
+    "contributes": {
+        "grammars": [
+            {
+                "scopeName": "ss-components.injection",
+                "path": "./syntaxes/ss-components.injection.json",
+                "injectTo": [
+                    "text.html.ss"
+                ]
+            }
+        ]
+    }
+}

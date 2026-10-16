@@ -1,0 +1,11 @@
+name: wedevelopnl-silverstripe-components
+services:
+  app:
+    build:
+      context: .
+      args:
+        PHP_VERSION: ${PHP_VERSION:-8.4}
+    working_dir: /module
+    volumes:
+      - ..:/module
+    command: sleep infinity

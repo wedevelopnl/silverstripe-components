@@ -1,0 +1,14 @@
+# Enforce LF line endings
+* text=auto eol=lf
+
+# Clean package — exclude dev/test files from distribution.
+/.docker                 export-ignore
+/.editorconfig           export-ignore
+/.github                 export-ignore
+/.gitattributes          export-ignore
+/.gitignore              export-ignore
+/tests                   export-ignore
+/AGENTS.md               export-ignore
+/CLAUDE.md               export-ignore
+/Taskfile.yml            export-ignore
+/phpunit.xml.dist        export-ignore

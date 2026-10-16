@@ -1,0 +1,59 @@
+version: '3'
+
+# Dev task runner for the Silverstripe Components module.
+# Install Task: https://taskfile.dev/installation
+# Non-interactive tasks exec with -T (no TTY in agent shells and CI); only `sh` keeps a TTY.
+
+vars:
+  COMPOSE: docker compose -f .docker/compose.yml
+  EXEC: docker compose -f .docker/compose.yml exec -T -u {{.UID}} app
+  EXEC_TTY: docker compose -f .docker/compose.yml exec -u {{.UID}} app
+  UID:
+    sh: id -u
+
+tasks:
+  up:
+    desc: Start the PHP container (build if needed)
+    cmds:
+      - "{{.COMPOSE}} up -d --build"
+
+  down:
+    desc: Stop the container
+    cmds:
+      - "{{.COMPOSE}} down"
+
+  sh:
+    desc: Open a shell in the container
+    deps: [ensure-up]
+    interactive: true
+    cmds:
+      - "{{.EXEC_TTY}} sh"
+
+  ensure-up:
+    desc: Ensure the container is running
+    cmds:
+      - "{{.EXEC}} true 2>/dev/null || {{.COMPOSE}} up -d --build"
+
+  install:
+    desc: Install Composer dependencies
+    deps: [ensure-up]
+    cmds:
+      - "{{.EXEC}} composer install --no-interaction --no-progress"
+
+  test:
+    desc: Run the PHPUnit suite (SQLite in-memory, no database server needed)
+    deps: [ensure-up]
+    cmds:
+      - "{{.EXEC}} vendor/bin/phpunit {{.CLI_ARGS}}"
+
+  test-flush:
+    desc: Run the PHPUnit suite with a fresh test manifest (after adding test classes)
+    deps: [ensure-up]
+    cmds:
+      - docker compose -f .docker/compose.yml exec -T -u {{.UID}} -e SS_PHPUNIT_FLUSH=1 app vendor/bin/phpunit {{.CLI_ARGS}}
+
+  vsix:
+    desc: Build the VS Code syntax extension (editor/vscode/ss-components-syntax.vsix)
+    dir: editor/vscode
+    cmds:
+      - npx --yes @vscode/vsce@3 package --allow-missing-repository --skip-license -o ss-components-syntax.vsix

@@ -1,0 +1,98 @@
+{
+    "scopeName": "ss-components.injection",
+    "injectionSelector": "L:text.html.ss -comment",
+    "patterns": [
+        { "include": "#slot-tag" },
+        { "include": "#component-tag" }
+    ],
+    "repository": {
+        "slot-tag": {
+            "name": "meta.tag.slot.ss-components",
+            "begin": "(</?)(:)(slot)\\b",
+            "beginCaptures": {
+                "1": { "name": "punctuation.definition.tag.begin.html" },
+                "2": { "name": "punctuation.definition.tag.begin.html" },
+                "3": { "name": "entity.name.tag.html" }
+            },
+            "end": "(/?>)",
+            "endCaptures": {
+                "1": { "name": "punctuation.definition.tag.end.html" }
+            },
+            "patterns": [{ "include": "#attributes" }]
+        },
+        "component-tag": {
+            "name": "meta.tag.component.ss-components",
+            "begin": "(</?)(:)([A-Z][A-Za-z0-9]*(?:\\.[A-Z][A-Za-z0-9]*)*)",
+            "beginCaptures": {
+                "1": { "name": "punctuation.definition.tag.begin.html" },
+                "2": { "name": "punctuation.definition.tag.begin.html" },
+                "3": { "name": "support.class.component.ss-components" }
+            },
+            "end": "(/?>)",
+            "endCaptures": {
+                "1": { "name": "punctuation.definition.tag.end.html" }
+            },
+            "patterns": [{ "include": "#attributes" }]
+        },
+        "attributes": {
+            "patterns": [
+                {
+                    "name": "meta.attribute.ss-components",
+                    "begin": "([A-Za-z_@][\\w\\-:.@]*)\\s*(=)\\s*(\")",
+                    "beginCaptures": {
+                        "1": { "name": "entity.other.attribute-name.html" },
+                        "2": { "name": "punctuation.separator.key-value.html" },
+                        "3": { "name": "string.quoted.double.html punctuation.definition.string.begin.html" }
+                    },
+                    "end": "\"",
+                    "endCaptures": {
+                        "0": { "name": "string.quoted.double.html punctuation.definition.string.end.html" }
+                    },
+                    "contentName": "string.quoted.double.html",
+                    "patterns": [
+                        { "include": "text.html.ss#ss-variable-closed" },
+                        { "include": "text.html.ss#ss-variable-open" }
+                    ]
+                },
+                {
+                    "name": "meta.attribute.ss-components",
+                    "begin": "([A-Za-z_@][\\w\\-:.@]*)\\s*(=)\\s*(')",
+                    "beginCaptures": {
+                        "1": { "name": "entity.other.attribute-name.html" },
+                        "2": { "name": "punctuation.separator.key-value.html" },
+                        "3": { "name": "string.quoted.single.html punctuation.definition.string.begin.html" }
+                    },
+                    "end": "'",
+                    "endCaptures": {
+                        "0": { "name": "string.quoted.single.html punctuation.definition.string.end.html" }
+                    },
+                    "contentName": "string.quoted.single.html",
+                    "patterns": [
+                        { "include": "text.html.ss#ss-variable-closed" },
+                        { "include": "text.html.ss#ss-variable-open" }
+                    ]
+                },
+                {
+                    "match": "([A-Za-z_@][\\w\\-:.@]*)(=)(\\$[\\w.]+(?:\\([^)]*\\))?)",
+                    "captures": {
+                        "1": { "name": "entity.other.attribute-name.html" },
+                        "2": { "name": "punctuation.separator.key-value.html" },
+                        "3": { "name": "variable.parameter.ss" }
+                    }
+                },
+                {
+                    "match": "([A-Za-z_@][\\w\\-:.@]*)(=)(true|false|null|-?\\d+(?:\\.\\d+)?)\\b",
+                    "captures": {
+                        "1": { "name": "entity.other.attribute-name.html" },
+                        "2": { "name": "punctuation.separator.key-value.html" },
+                        "3": { "name": "constant.language.ss-components" }
+                    }
+                },
+                {
+                    "match": "[A-Za-z_@][\\w\\-:.@]*",
+                    "name": "entity.other.attribute-name.html"
+                }
+            ]
+        }
+    }
+}

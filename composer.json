@@ -1,0 +1,51 @@
+{
+    "name": "wedevelopnl/silverstripe-components",
+    "description": "Reusable components for Silverstripe templates: <:Component> tags with props, slots, variants and class merging",
+    "type": "silverstripe-vendormodule",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "silverstripe",
+        "components",
+        "templates",
+        "tailwind",
+        "slots"
+    ],
+    "authors": [
+        {
+            "name": "WeDevelop",
+            "email": "development@wedevelop.nl"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^8.3",
+        "silverstripe/framework": "^6.0",
+        "silverstripe/template-engine": "^1.0"
+    },
+    "require-dev": {
+        "gehrisandro/tailwind-merge-php": "^1.2",
+        "phpunit/phpunit": "^11.5",
+        "silverstripe/sqlite3": "^4.0"
+    },
+    "suggest": {
+        "gehrisandro/tailwind-merge-php": "Required for the default TailwindClassMerger (resolves Tailwind class conflicts in $Classes)"
+    },
+    "autoload": {
+        "psr-4": {
+            "WeDevelop\\Components\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "WeDevelop\\Components\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "silverstripe/recipe-plugin": true,
+            "silverstripe/vendor-plugin": true
+        }
+    }
+}

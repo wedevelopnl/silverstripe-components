@@ -1,0 +1,9 @@
+/vendor/
+/composer.lock
+/.phpunit.cache/
+/.phpunit.result.cache
+/silverstripe-cache/
+/editor/vscode/*.vsix
+/node_modules/
+.DS_Store
+/public/

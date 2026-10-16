@@ -1,0 +1,15 @@
+---
+Name: wedevelop-components
+---
+SilverStripe\Core\Injector\Injector:
+  Psr\SimpleCache\CacheInterface.componentClassMerge:
+    factory: SilverStripe\Core\Cache\CacheFactory
+    constructor:
+      namespace: 'componentClassMerge'
+  # Swap for WeDevelop\Components\SimpleClassMerger in projects without Tailwind
+  WeDevelop\Components\ClassMerger:
+    class: WeDevelop\Components\TailwindClassMerger
+    constructor:
+      - '%$Psr\SimpleCache\CacheInterface.componentClassMerge'
+  SilverStripe\TemplateEngine\SSTemplateParser:
+    class: WeDevelop\Components\Parser\ComponentParser

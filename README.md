@@ -4,12 +4,11 @@ Reusable components for Silverstripe 6 `.ss` templates: props, default and named
 optional component classes, variants and class merging (Tailwind-aware by default, but
 usable with any CSS framework or none at all).
 
-> **Beta.** The API may still change before 1.0.0. The repository is private for now, so
-> add it as a VCS repository (and make sure Composer can authenticate to GitHub, e.g.
-> `composer config --global github-oauth.github.com <token>`):
+> **Beta.** The API may still change before 1.0.0. The package is not on Packagist yet, so
+> add the repository first:
 >
 > ```bash
-> composer config repositories.silverstripe-components vcs git@github.com:wedevelopnl/silverstripe-components.git
+> composer config repositories.silverstripe-components vcs https://github.com/wedevelopnl/silverstripe-components
 > ```
 
 ## Installation
